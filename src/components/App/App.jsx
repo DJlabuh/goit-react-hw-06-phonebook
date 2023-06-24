@@ -32,7 +32,7 @@ export const App = () => {
         <Title>Contacts</Title>
         <Filter />
         {visibleContacts.length ? (
-          <ContactList contacts={visibleContacts} />
+          <ContactList />
         ) : (
           <WarningText>Contact not found!</WarningText>
         )}

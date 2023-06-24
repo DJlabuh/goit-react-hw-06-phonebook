@@ -1,4 +1,4 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addContacts } from 'redux/contactsSlice';
 import {
   FormContact,
@@ -6,13 +6,24 @@ import {
   FormInput,
   FormButton,
 } from './ContactForm.styled';
+import Notiflix from 'notiflix';
 
 export const ContactForm = () => {
   const dispatch = useDispatch();
+  const contacts = useSelector(state => state.contacts.array);
 
   const handleSubmit = e => {
     e.preventDefault();
     const { name, number } = e.target;
+
+    const isDuplicateContact = contacts.some(
+      contact => contact.name.toLowerCase() === name.value.toLowerCase()
+    );
+
+    if (isDuplicateContact) {
+      Notiflix.Notify.warning('Contact with this name already exists!');
+      return;
+    }
 
     dispatch(addContacts(name.value, number.value));
     name.value = '';
