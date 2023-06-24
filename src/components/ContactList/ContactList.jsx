@@ -1,4 +1,5 @@
-import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
+import { deleteContacts } from 'redux/contactsSlice';
 import {
   ContactsUl,
   ContactsLi,
@@ -6,7 +7,13 @@ import {
   ContactsButton,
 } from './ContactList.styled.jsx';
 
-export const ContactList = ({ contacts, handleDeleteContact }) => {
+export const ContactList = ({ contacts }) => {
+  const dispatch = useDispatch();
+
+  const handleDeleteContact = id => {
+    dispatch(deleteContacts(id));
+  };
+
   return (
     <ContactsUl>
       {contacts.map(({ name, number, id }) => (
@@ -20,15 +27,4 @@ export const ContactList = ({ contacts, handleDeleteContact }) => {
       ))}
     </ContactsUl>
   );
-};
-
-ContactList.propTypes = {
-  contacts: PropTypes.arrayOf(
-    PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      number: PropTypes.string.isRequired,
-      id: PropTypes.string.isRequired,
-    })
-  ).isRequired,
-  handleDeleteContact: PropTypes.func.isRequired,
 };
