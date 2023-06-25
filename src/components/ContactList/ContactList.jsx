@@ -8,7 +8,7 @@ import {
   ContactsButton,
 } from './ContactList.styled.jsx';
 
-import { getVisibleContacts } from '../../helpers/contactUtils';
+import { getVisibleContacts } from 'helpers/contactUtils';
 
 export const ContactList = () => {
   const dispatch = useDispatch();

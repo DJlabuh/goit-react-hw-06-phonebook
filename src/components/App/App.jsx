@@ -7,7 +7,7 @@ import { ContactForm } from 'components/ContactForm';
 import { Filter } from 'components/Filter';
 import { ContactList } from 'components/ContactList';
 
-import { getVisibleContacts } from '../../helpers/contactUtils';
+import { getVisibleContacts } from 'helpers/contactUtils';
 
 export const App = () => {
   const contacts = useSelector(getContacts);
