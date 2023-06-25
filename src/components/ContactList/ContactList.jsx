@@ -1,4 +1,5 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { getContacts, getFilter } from 'redux/selectors';
 import { deleteContacts } from 'redux/contactsSlice';
 import {
   ContactsUl,
@@ -7,8 +8,14 @@ import {
   ContactsButton,
 } from './ContactList.styled.jsx';
 
-export const ContactList = ({ visibleContacts }) => {
+import { getVisibleContacts } from '../../helpers/contactUtils';
+
+export const ContactList = () => {
   const dispatch = useDispatch();
+  const contacts = useSelector(getContacts);
+  const filter = useSelector(getFilter);
+
+  const visibleContacts = getVisibleContacts(contacts, filter);
 
   const handleDeleteContact = id => {
     dispatch(deleteContacts(id));

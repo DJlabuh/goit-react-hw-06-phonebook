@@ -7,20 +7,13 @@ import { ContactForm } from 'components/ContactForm';
 import { Filter } from 'components/Filter';
 import { ContactList } from 'components/ContactList';
 
+import { getVisibleContacts } from '../../helpers/contactUtils';
+
 export const App = () => {
   const contacts = useSelector(getContacts);
   const filter = useSelector(getFilter);
 
-  const getVisibleContacts = () => {
-    const normalizedFilter =
-      filter && filter.query ? filter.query.toLowerCase() : '';
-
-    return contacts.filter(contact =>
-      contact.name.toLowerCase().includes(normalizedFilter)
-    );
-  };
-
-  const visibleContacts = getVisibleContacts();
+  const visibleContacts = getVisibleContacts(contacts, filter);
 
   return (
     <Container>
@@ -32,7 +25,7 @@ export const App = () => {
         <Title>Contacts</Title>
         <Filter />
         {visibleContacts.length ? (
-          <ContactList visibleContacts={visibleContacts} />
+          <ContactList />
         ) : (
           <WarningText>Contact not found!</WarningText>
         )}
