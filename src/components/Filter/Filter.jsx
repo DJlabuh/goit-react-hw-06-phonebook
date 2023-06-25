@@ -18,7 +18,7 @@ export const Filter = () => {
         <FilterInput
           type="text"
           name="filter"
-          value={filter}
+          value={filter.query}
           onChange={handleChange}
         />
       </FilterLabel>
